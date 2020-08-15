@@ -11,7 +11,23 @@ variables:
 trigger:
   - master
 stages:
+  - stage: Default
+    jobs:
+      - job: Package
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - bash: |
+              cp -r * $(Build.BinariesDirectory)/
+            displayName: Copy contents
+          - task: ArchiveFiles@2
+            inputs:
+              includeRootFolder: false
+          - publish: $(Build.ArtifactStagingDirectory)
+            artifact: app
   - stage: Deployment
+    dependsOn:
+      - Default
     jobs:
       - deployment: Deploy
         pool:
