@@ -1,0 +1,4 @@
+node_modules
+*.rej
+*.orig
+*~
