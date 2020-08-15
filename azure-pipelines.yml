@@ -37,10 +37,13 @@ stages:
           runOnce:
             deploy:
               steps:
+                - checkout: none
+                - download: current
+                  artifact: app
                 - task: AzureWebApp@1
                   inputs:
                     azureSubscription: $(deploy.azureSubscription)
                     appType: webApp
                     appName: $(deploy.appName)
-                    package: .
+                    package: $(Agent.BuildDirectory)/app/*.zip
                     deploymentMethod: zipDeploy
