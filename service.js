@@ -30,13 +30,14 @@ self.addEventListener("install", (event) => {
     event.waitUntil(caches.open(CACHE_NAME)
         .then((cache) => {
             return cache.addAll([
+                "index.html",
                 "app.webmanifest",
                 "service.js",
-                "index.html",
                 "resources/decorate.js",
                 "resources/app.js",
                 "resources/site.css",
                 "resources/site-theme-default.css",
             ]);
-        }));
+        })
+    );
 });
