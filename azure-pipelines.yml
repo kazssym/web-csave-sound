@@ -18,6 +18,7 @@ stages:
           vmImage: ubuntu-latest
         steps:
           - bash: |
+              cp web.config $(Build.BinariesDirectory)/web.config
               for i in index.html app.webmanifest resources; do
                   cp -r $i $(Build.BinariesDirectory)/$i || exit $?
               done
