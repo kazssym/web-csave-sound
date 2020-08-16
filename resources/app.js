@@ -24,9 +24,17 @@
  * @module app.js
  */
 
+async function registerServiceWorker(name)
+{
+    let registration = await navigator.serviceWorker.register(name);
+    console.debug("registered service worker: %o", registration);
+}
+
 function init(/* event */)
 {
     console.debug("init!");
+
+    registerServiceWorker("./service.js");
 }
 
 init();
