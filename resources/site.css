@@ -28,6 +28,11 @@ body
     flex: auto;
 }
 
+.site-scroll
+{
+    overflow: scroll;
+}
+
 .site-content
 {
     margin: 12px 12px;
