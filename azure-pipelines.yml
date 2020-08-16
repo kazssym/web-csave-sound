@@ -18,7 +18,9 @@ stages:
           vmImage: ubuntu-latest
         steps:
           - bash: |
-              cp -r * $(Build.BinariesDirectory)/
+              set -e
+              cp index.html $(Build.BinariesDirectory)/
+              cp -r resources $(Build.BinariesDirectory)/
             displayName: Copy contents
           - task: ArchiveFiles@2
             inputs:
