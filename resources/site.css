@@ -28,19 +28,9 @@ body
     flex: auto;
 }
 
-#header > *
+.site-content
 {
-    margin: 8px;
-}
-
-#header-title
-{
-    font-size: 18px;
-}
-
-.site-text-box
-{
-    margin: 8px;
+    margin: 12px 12px;
     max-width: 768px;
 }
 
