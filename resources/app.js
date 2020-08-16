@@ -23,3 +23,10 @@
  *
  * @module app.js
  */
+
+function init(/* event */)
+{
+    console.debug("init!");
+}
+
+init();
