@@ -19,7 +19,7 @@ stages:
         steps:
           - bash: |
               cp web.config $(Build.BinariesDirectory)/web.config
-              for i in index.html app.webmanifest resources; do
+              for i in index.html app.webmanifest service.js resources; do
                   cp -r $i $(Build.BinariesDirectory)/$i || exit $?
               done
             displayName: Copy contents
