@@ -1,0 +1,54 @@
+/* site.css */
+
+html
+{
+    height: 100%;
+}
+
+body
+{
+    min-height: 100%;
+}
+
+.site-hbox
+{
+    display: flex;
+    flex-flow: row;
+}
+
+.site-vbox
+{
+    display: flex;
+    flex-flow: column;
+}
+
+.site-hbox > .site-hbox-grow,
+.site-vbox > .site-vbox-grow
+{
+    flex: auto;
+}
+
+#header > *
+{
+    margin: 8px;
+}
+
+#header-title
+{
+    font-size: 18px;
+}
+
+.site-text-box
+{
+    margin: 8px;
+    max-width: 768px;
+}
+
+@media (min-width: 384px)
+{
+    .site-w-hbox
+    {
+        display: flex;
+        flex-flow: row;
+    }
+}
