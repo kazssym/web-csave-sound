@@ -94,6 +94,7 @@ function decorate(/* event */)
     // Nothing to do yet.
 }
 
+// This should be safe.
 addStylesheets(...STYLESHEETS);
 
 if (document.readyState != "loading") {
