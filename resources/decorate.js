@@ -91,8 +91,10 @@ function addStylesheets(...stylesheets)
  */
 function decorate(/* event */)
 {
-    addStylesheets(...STYLESHEETS);
+    // Nothing to do yet.
 }
+
+addStylesheets(...STYLESHEETS);
 
 if (document.readyState != "loading") {
     // The 'DOMContentLoaded' event has already been fired.
