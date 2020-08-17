@@ -83,24 +83,28 @@ function addStylesheets(...stylesheets)
 }
 
 /**
- * Decorates the current document.
+ * Waits for the DOM content of the document to be loaded.
  *
- * This function may be used as an event handler.
- *
- * @param {Event} [event] an optional DOM event
+ * @return {Promise<Event>} a Promise object for a `DOMContentLoaded` event
  */
-function decorate(/* event */)
+function waitForDocument()
 {
-    // Nothing to do yet.
+    return new Promise((resolve) => {
+        if (document.readyState != "loading") {
+            // The 'DOMContentLoaded' event has already been fired.
+            resolve();
+        }
+        else {
+            document.addEventListener("DOMContentLoaded", resolve);
+        }
+    });
 }
 
-// This should be safe.
+
+// This should be safe to do here.
 addStylesheets(...STYLESHEETS);
 
-if (document.readyState != "loading") {
-    // The 'DOMContentLoaded' event has already been fired.
-    decorate();
-}
-else {
-    document.addEventListener("DOMContentLoaded", decorate);
-}
+waitForDocument()
+    .then((/* event */) => {
+        // Nothing to do yet.
+    });
