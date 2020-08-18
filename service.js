@@ -44,7 +44,8 @@ self.addEventListener("install",
                 ]);
             }
             catch (error) {
-                // Nothing to do here.
+                caches.delete(CACHE_NAME);
+                return await prepareCache();
             }
         };
         event.waitUntil(prepareCache());
