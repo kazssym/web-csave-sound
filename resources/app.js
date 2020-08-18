@@ -24,6 +24,21 @@
  * @module app.js
  */
 
+function doPlay()
+{
+    console.debug("doPlay!");
+}
+
+function bindCommands()
+{
+    for (let i of document.getElementsByClassName("app-command-play")) {
+        i.addEventListener("click", doPlay);
+        if (i.disabled) {
+            i.disabled = false;
+        }
+    }
+}
+
 async function registerServiceWorker(name)
 {
     let registration = await navigator.serviceWorker.register(name);
@@ -35,6 +50,8 @@ function init(/* event */)
     console.debug("init!");
 
     registerServiceWorker("./service.js");
+
+    bindCommands();
 }
 
 init();
