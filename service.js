@@ -30,15 +30,20 @@ self.addEventListener("install",
     (event) => {
         let prepareCache = async () => {
             let cache = await caches.open(CACHE_NAME);
-            return await cache.addAll([
-                "",
-                "index.html",
-                "service.js",
-                "resources/decorate.js",
-                "resources/app.js",
-                "resources/site.css",
-                "resources/site-theme-default.css",
-            ]);
+            try {
+                return await cache.addAll([
+                    "",
+                    "index.html",
+                    "service.js",
+                    "resources/decorate.js",
+                    "resources/app.js",
+                    "resources/site.css",
+                    "resources/site-theme-default.css",
+                ]);
+            }
+            catch (error) {
+                // Nothing to do here.
+            }
         };
         event.waitUntil(prepareCache());
     }
