@@ -36,8 +36,8 @@ const MATERIAL_ICONS_FONT_URL =
 const STYLESHEETS = [
     {href: PURE_URL, crossOrigin: "anonymous"},
     {href: MATERIAL_ICONS_FONT_URL, crossOrigin: "anonymous"},
-    {href: "/resources/site.css"},
-    {href: "/resources/site-theme-default.css", title: "Default Theme"},
+    {href: "resources/site.css"},
+    {href: "resources/site-theme-default.css", title: "Default Theme"},
 ];
 
 /**
