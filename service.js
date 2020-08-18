@@ -44,15 +44,18 @@ self.addEventListener("install", (event) => {
     );
 });
 
-self.addEventListener("fetch", (event) => {
-    if (event.request.method == "GET") {
-        event.respondWith(caches.match(event.request)
-            .then((response) => {
+self.addEventListener("fetch",
+    (event) => {
+        if (event.request.method == "GET") {
+            let getResponse = async (request) => {
+                let response = await caches.match(request);
                 if (response != null) {
                     return response;
                 }
-                return fetch(event.request);
-            })
-        );
+
+                return await fetch(request);
+            };
+            event.respondWith(getResponse(event.request));
+        }
     }
-});
+);
