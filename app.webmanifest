@@ -4,5 +4,6 @@
     "short_name": "csave-audio",
     "icons": [],
     "start_url": "./",
-    "theme_color": "#666666"
+    "theme_color": "#666666",
+    "background_color": "#ffffff"
 }
