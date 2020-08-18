@@ -34,11 +34,13 @@ self.addEventListener("install",
                 return await cache.addAll([
                     "",
                     "index.html",
+                    "app.webmanifest",
                     "service.js",
                     "resources/decorate.js",
                     "resources/app.js",
                     "resources/site.css",
                     "resources/site-theme-default.css",
+                    "resources/linuxfront-icon-01-256.png",
                 ]);
             }
             catch (error) {
