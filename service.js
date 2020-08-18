@@ -52,8 +52,11 @@ self.addEventListener("fetch",
                 if (response != null) {
                     return response;
                 }
+                response = await fetch(request);
 
-                return await fetch(request);
+                let cache = await caches.open(CACHE_NAME);
+                await cache.put(request, response);
+                return await cache.match(request);
             };
             event.respondWith(getResponse(event.request));
         }
