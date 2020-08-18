@@ -3,6 +3,6 @@
     "name": "csave-audio",
     "short_name": "csave-audio",
     "icons": [],
-    "start_url": "index.html",
+    "start_url": "./",
     "theme_color": "#666666"
 }
