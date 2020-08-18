@@ -2,7 +2,12 @@
     "$schema": "https://json.schemastore.org/web-manifest",
     "name": "csave-audio",
     "short_name": "csave-audio",
-    "icons": [],
+    "icons": [
+        {
+            "src": "resources/linuxfront-icon-01-256.png",
+            "sizes": "256x256"
+        }
+    ],
     "start_url": "./",
     "theme_color": "#666666",
     "background_color": "#ffffff"
