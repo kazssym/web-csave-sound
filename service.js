@@ -44,6 +44,13 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("fetch", (event) => {
     if (event.request.method == "GET") {
-        event.respondWith(caches.match(event.request));
+        event.respondWith(caches.match(event.request)
+            .then((response) => {
+                if (response != null) {
+                    return response;
+                }
+                return fetch(event.request);
+            })
+        );
     }
 });
