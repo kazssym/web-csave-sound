@@ -29,8 +29,8 @@ const CACHE_NAME = "1.0";
 self.addEventListener("install",
     (event) => {
         let prepareCache = async () => {
-            let cache = await caches.open(CACHE_NAME);
             try {
+                let cache = await caches.open(CACHE_NAME);
                 return await cache.addAll([
                     "",
                     "index.html",
