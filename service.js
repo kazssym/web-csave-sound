@@ -38,6 +38,7 @@ self.addEventListener("install", (event) => {
                 "resources/app.js",
                 "resources/site.css",
                 "resources/site-theme-default.css",
+                "resources/linuxfront-icon-01-256.png",
             ]);
         })
     );
