@@ -45,10 +45,6 @@ async function registerServiceWorker(name)
     console.debug("registered service worker: %o", registration);
 }
 
-function init(/* event */)
-{
-    registerServiceWorker("./service.js");
-    bindCommands();
-}
 
-init();
+registerServiceWorker("./service.js");
+bindCommands();
