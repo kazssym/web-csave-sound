@@ -26,10 +26,11 @@
 
 const CACHE_NAME = "1.0";
 
-self.addEventListener("install", (event) => {
-    event.waitUntil(caches.open(CACHE_NAME)
-        .then((cache) => {
-            return cache.addAll([
+self.addEventListener("install",
+    (event) => {
+        let prepareCache = async () => {
+            let cache = await caches.open(CACHE_NAME);
+            return await cache.addAll([
                 "",
                 "index.html",
                 "app.webmanifest",
@@ -40,9 +41,10 @@ self.addEventListener("install", (event) => {
                 "resources/site-theme-default.css",
                 "resources/linuxfront-icon-01-256.png",
             ]);
-        })
-    );
-});
+        };
+        event.waitUntil(prepareCache());
+    }
+);
 
 self.addEventListener("fetch",
     (event) => {
