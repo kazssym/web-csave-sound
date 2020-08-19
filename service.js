@@ -29,25 +29,19 @@ const CACHE_NAME = "1.0.0";
 self.addEventListener("install",
     (event) => {
         let prepareCache = async () => {
-            try {
-                let cache = await caches.open(CACHE_NAME);
-                return await cache.addAll([
-                    "",
-                    "index.html",
-                    "app.webmanifest",
-                    "service.js",
-                    "resources/decorate.js",
-                    "resources/app.js",
-                    "resources/worklet.js",
-                    "resources/site.css",
-                    "resources/site-theme-default.css",
-                    "resources/linuxfront-icon-01-256.png",
-                ]);
-            }
-            catch (error) {
-                caches.delete(CACHE_NAME);
-                return await prepareCache();
-            }
+            let cache = await caches.open(CACHE_NAME);
+            return await cache.addAll([
+                "",
+                "index.html",
+                "app.webmanifest",
+                "service.js",
+                "resources/decorate.js",
+                "resources/app.js",
+                "resources/worklet.js",
+                "resources/site.css",
+                "resources/site-theme-default.css",
+                "resources/linuxfront-icon-01-256.png",
+            ]);
         };
         event.waitUntil(prepareCache());
     }
