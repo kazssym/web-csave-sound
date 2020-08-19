@@ -26,6 +26,8 @@
 
 /* global sampleRate */
 
+const RENDER_QUANTUM = 128;
+
 /**
  * Audio worklet processor that generates classic *CSAVE* sound.
  *
@@ -36,13 +38,36 @@ export class CsaveProcessor extends AudioWorkletProcessor
     constructor(options)
     {
         super(options);
+        this._amplitude = 0.125;
         this._f0 = 1200;
         this._f1 = 2400;
-        this._preamble = 1000; // ms
+
+        this._phase = 0;
+        this._preambleDuration = sampleRate;
     }
 
-    process(/* inputs, outputs, parameters */)
+    process(inputs, outputs, /* parameters */)
     {
+        if (outputs.length >= 1) {
+            let k = 0;
+            while (this._preambleDuration != 0) {
+                if (k >= RENDER_QUANTUM) {
+                    break;
+                }
+
+                let value = this._amplitude * Math.sin(this._phase);
+                this._phase += 2 * Math.PI * (this._f1 / sampleRate);
+
+                for (let output of outputs) {
+                    for (let channel of output) {
+                        channel[k] = value;
+                    }
+                }
+                k++;
+                this._preambleDuration--;
+            }
+            return k >= 0;
+        }
         return false;
     }
 }
