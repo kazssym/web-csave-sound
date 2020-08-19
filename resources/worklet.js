@@ -25,13 +25,15 @@
  */
 
 /**
- * Audio worklet processor that generates *CSAVE-like* sound.
+ * Audio worklet processor that generates classic *CSAVE* sound.
+ *
+ * @param {*} options options for the processor
  */
 export class CsaveProcessor extends AudioWorkletProcessor
 {
-    constructor()
+    constructor(options)
     {
-        super();
+        super(options);
         this._f0 = 1200;
         this._f1 = 2400;
         this._preamble = 1000; // ms
