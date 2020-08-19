@@ -28,7 +28,8 @@
  * Audio context.
  */
 let audioContext = new AudioContext();
-console.debug("AudioWorklet: %o", audioContext.audioWorklet);
+
+audioContext.audioWorklet.addModule("./worklet.js");
 
 function doPlay()
 {
