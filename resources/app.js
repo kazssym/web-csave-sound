@@ -24,6 +24,12 @@
  * @module app.js
  */
 
+/**
+ * Audio context.
+ */
+let audioContext = new AudioContext();
+console.debug("AudioWorklet: %o", audioContext.audioWorklet);
+
 function doPlay()
 {
     console.debug("doPlay!");
