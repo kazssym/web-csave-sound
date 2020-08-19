@@ -29,7 +29,7 @@
  */
 let audioContext = new AudioContext();
 
-audioContext.audioWorklet.addModule("./worklet.js");
+audioContext.audioWorklet.addModule("./resources/worklet.js");
 
 function doPlay()
 {
