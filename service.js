@@ -63,8 +63,10 @@ self.addEventListener("fetch",
                 }
 
                 let response = await fetch(request);
-                let cache = await caches.open(CACHE_NAME);
-                await cache.put(request, response.clone());
+                if (response.type != "error") {
+                    let cache = await caches.open(CACHE_NAME);
+                    await cache.put(request, response.clone());
+                }
                 return response;
             };
             event.respondWith(getResponse(event.request));
