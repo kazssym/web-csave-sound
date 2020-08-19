@@ -24,6 +24,8 @@
  * @module worklet.js
  */
 
+/* global sampleRate */
+
 /**
  * Audio worklet processor that generates classic *CSAVE* sound.
  *
@@ -44,5 +46,8 @@ export class CsaveProcessor extends AudioWorkletProcessor
         return false;
     }
 }
+
+
+console.debug("sample rate: %d", sampleRate);
 
 registerProcessor("csave-processor", CsaveProcessor);
