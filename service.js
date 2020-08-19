@@ -55,15 +55,17 @@ self.addEventListener("fetch",
     (event) => {
         if (event.request.method == "GET") {
             let getResponse = async (request) => {
-                let response = await caches.match(request);
-                if (response != null) {
-                    return response;
+                if (request.cache != "reload") {
+                    let responseCached = await caches.match(request);
+                    if (responseCached != null) {
+                        return responseCached;
+                    }
                 }
-                response = await fetch(request);
 
+                let response = await fetch(request);
                 let cache = await caches.open(CACHE_NAME);
-                await cache.put(request, response);
-                return await cache.match(request);
+                await cache.put(request, response.clone());
+                return response;
             };
             event.respondWith(getResponse(event.request));
         }
