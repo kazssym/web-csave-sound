@@ -34,6 +34,9 @@ audioContext.audioWorklet.addModule("./resources/worklet.js");
 function doPlay()
 {
     console.debug("doPlay!");
+
+    let csaveNode = new AudioWorkletNode(audioContext, "csave-processor");
+    csaveNode.connect(audioContext.destination);
 }
 
 function bindCommands()
