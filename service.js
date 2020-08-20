@@ -52,6 +52,19 @@ self.addEventListener("install",
     }
 );
 
+self.addEventListener("activate",
+    (event) => {
+        let cleanCache = async () => {
+            caches.forEach(async (cache, cacheName) => {
+                if (cacheName != CACHE_NAME) {
+                    return await caches.delete(cacheName);
+                }
+            });
+        };
+        event.waitUntil(cleanCache());
+    }
+);
+
 self.addEventListener("fetch",
     (event) => {
         if (event.request.method == "GET") {
