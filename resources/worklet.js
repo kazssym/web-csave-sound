@@ -70,7 +70,7 @@ export class CsaveProcessor extends AudioWorkletProcessor
             yield this._advance(this._increments[1]);
         }
         for (let byte of sequence) {
-            byte = 0x20 | (byte << 1);
+            byte = 0x20 | ((byte & 0xff) << 1);
             while (byte != 0) {
                 let duration = sampleRate / this._bitRate;
                 while (duration-- > 0) {
