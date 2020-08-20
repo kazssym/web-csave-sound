@@ -72,7 +72,7 @@ export class CsaveProcessor extends AudioWorkletProcessor
                 }
                 k++;
             }
-            return k >= 0;
+            return k > 0;
         }
         return false;
     }
