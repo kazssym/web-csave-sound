@@ -35,7 +35,10 @@ function doPlay()
 {
     console.debug("doPlay!");
 
-    let csaveNode = new AudioWorkletNode(audioContext, "csave-processor");
+    let csaveNode = new AudioWorkletNode(audioContext, "csave-processor", {
+        bitRate: 600,
+        data: TextEncoder.encode("abcdefghijklmnopqrstuvwxyz"),
+    });
     csaveNode.connect(audioContext.destination);
 }
 
