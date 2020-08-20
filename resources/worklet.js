@@ -48,7 +48,12 @@ export class CsaveProcessor extends AudioWorkletProcessor
         this._increments = [1200 / sampleRate, 2400 / sampleRate];
 
         this._phase = 0;
-        this._wave = this._generateWave(2 * sampleRate, [48, 49, 50, 51, 52, 53, 54, 55, 56, 57]);
+
+        let testData = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57];
+        testData = testData.concat(testData);
+        testData = testData.concat(testData);
+        testData = testData.concat(testData);
+        this._wave = this._generateWave(2 * sampleRate, testData);
     }
 
     _advance(increment)
