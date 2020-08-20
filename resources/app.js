@@ -35,11 +35,17 @@ function doPlay()
 {
     console.debug("doPlay!");
 
-    let encoder = new TextEncoder();
+    let textArea = document.getElementById("text-data");
+    let data = [];
+    if (textArea != null) {
+        let encoder = new TextEncoder();
+        data = encoder.encode(textArea.value);
+    }
+
     let csaveNode = new AudioWorkletNode(audioContext, "csave-processor", {
         processorOptions: {
             bitRate: 600,
-            data: encoder.encode("abcdefghijklmnopqrstuvwxyz"),
+            data: data,
         },
     });
     csaveNode.connect(audioContext.destination);
