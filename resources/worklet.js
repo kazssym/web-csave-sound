@@ -48,7 +48,7 @@ export class CsaveProcessor extends AudioWorkletProcessor
         this._f1 = 2400;
 
         this._phase = 0;
-        this._wave = this._generateWave(sampleRate);
+        this._wave = this._generateWave(2 * sampleRate);
     }
 
     *_generateWave(duration)
