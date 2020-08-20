@@ -48,7 +48,7 @@ export class CsaveProcessor extends AudioWorkletProcessor
         this._increments = [1200 / sampleRate, 2400 / sampleRate];
 
         this._phase = 0;
-        this._wave = this._generateWave(2 * sampleRate, TextEncoder.encode("0123456789"));
+        this._wave = this._generateWave(2 * sampleRate, [48, 49, 50, 51, 52, 53, 54, 55, 56, 57]);
     }
 
     _advance(increment)
