@@ -55,9 +55,10 @@ self.addEventListener("install",
 self.addEventListener("activate",
     (event) => {
         let cleanCache = async () => {
-            caches.forEach(async (cache, cacheName) => {
-                if (cacheName != CACHE_NAME) {
-                    return await caches.delete(cacheName);
+            let cacheNames = await caches.keys();
+            cacheNames.forEach(async (name) => {
+                if (name != CACHE_NAME) {
+                    return await caches.delete(name);
                 }
             });
         };
