@@ -29,6 +29,11 @@
 const RENDER_QUANTUM = 128;
 
 /**
+ * Default bit rate.
+ */
+const DEFAULT_BIT_RATE = 1200;
+
+/**
  * Default value for the amplitude.
  */
 const DEFAULT_AMPLITUDE = 0.125;
@@ -43,17 +48,22 @@ export class CsaveProcessor extends AudioWorkletProcessor
     constructor(options)
     {
         super(options);
+
+        this._bitRate = options.processorOptions.bitRate;
+        if (this._bitRate == null || this._bitRate == 0) {
+            this._bitRate = DEFAULT_BIT_RATE;
+        }
+
+        this._bytes = options.processorOptions.data;
+        if (this._bytes == null) {
+            this._bytes = [];
+        }
+
         this._amplitude = DEFAULT_AMPLITUDE;
-        this._bitRate = 1200;
         this._increments = [1200 / sampleRate, 2400 / sampleRate];
 
         this._phase = 0;
-
-        let testData = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57];
-        testData = testData.concat(testData);
-        testData = testData.concat(testData);
-        testData = testData.concat(testData);
-        this._wave = this._generateWave(2 * sampleRate, testData);
+        this._wave = this._generateWave(2 * sampleRate, this._bytes);
     }
 
     _advance(increment)
