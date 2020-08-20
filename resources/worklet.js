@@ -29,6 +29,11 @@
 const RENDER_QUANTUM = 128;
 
 /**
+ * Default value for the amplitude.
+ */
+const DEFAULT_AMPLITUDE = 0.125;
+
+/**
  * Audio worklet processor that generates classic *CSAVE* sound.
  *
  * @param {*} options options for the processor
@@ -38,7 +43,7 @@ export class CsaveProcessor extends AudioWorkletProcessor
     constructor(options)
     {
         super(options);
-        this._amplitude = 0.125;
+        this._amplitude = DEFAULT_AMPLITUDE;
         this._f0 = 1200;
         this._f1 = 2400;
 
