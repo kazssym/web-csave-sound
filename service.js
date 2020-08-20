@@ -56,9 +56,9 @@ self.addEventListener("activate",
     (event) => {
         let cleanCache = async () => {
             let cacheNames = await caches.keys();
-            cacheNames.forEach(async (name) => {
+            cacheNames.forEach((name) => {
                 if (name != CACHE_NAME) {
-                    return await caches.delete(name);
+                    caches.delete(name);
                 }
             });
         };
