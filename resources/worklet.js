@@ -44,19 +44,35 @@ export class CsaveProcessor extends AudioWorkletProcessor
     {
         super(options);
         this._amplitude = DEFAULT_AMPLITUDE;
-        this._f0 = 1200;
-        this._f1 = 2400;
+        this._bitRate = 1200;
+        this._increments = [1200 / sampleRate, 2400 / sampleRate];
 
         this._phase = 0;
-        this._wave = this._generateWave(2 * sampleRate);
+        this._wave = this._generateWave(2 * sampleRate, TextEncoder.encode("0123456789"));
     }
 
-    *_generateWave(duration)
+    _advance(increment)
     {
-        while (duration-- >= 0) {
-            let value = this._amplitude * Math.sin(this._phase);
-            this._phase += 2 * Math.PI * (this._f1 / sampleRate);
-            yield value;
+        let sample = this._amplitude * Math.sin(2 * Math.PI * this._phase);
+        this._phase += increment;
+        this._phase -= Math.floor(this._phase);
+        return sample;
+    }
+
+    *_generateWave(preambleDuration, sequence)
+    {
+        while (preambleDuration-- > 0) {
+            yield this._advance(this._increments[1]);
+        }
+        for (let byte of sequence) {
+            byte = 0x20 | (byte << 1);
+            while (byte != 0) {
+                let duration = sampleRate / this._bitRate;
+                while (duration-- > 0) {
+                    yield this._advance(this._increments[byte & 0x1]);
+                }
+                byte >>= 1;
+            }
         }
         return 0;
     }
