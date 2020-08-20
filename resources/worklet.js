@@ -49,12 +49,17 @@ export class CsaveProcessor extends AudioWorkletProcessor
     {
         super(options);
 
-        this._bitRate = options.processorOptions.bitRate;
+        let processorOptions = options.processorOptions;
+        if (processorOptions == null) {
+            processorOptions = {};
+        }
+
+        this._bitRate = processorOptions.bitRate;
         if (this._bitRate == null || this._bitRate == 0) {
             this._bitRate = DEFAULT_BIT_RATE;
         }
 
-        this._bytes = options.processorOptions.data;
+        this._bytes = processorOptions.data;
         if (this._bytes == null) {
             this._bytes = [];
         }
