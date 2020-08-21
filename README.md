@@ -7,3 +7,5 @@ This web application uses the [Web Audio API] to generate “CSAVE” sounds on 
 # See also
 
   - The [Web Audio API].
+
+  - The [Kansas City standard](https://en.wikipedia.org/wiki/Kansas_City_standard).
