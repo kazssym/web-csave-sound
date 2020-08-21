@@ -24,6 +24,8 @@
  * @module app.js
  */
 
+let AudioContext = window.AudioContext || window.webkitAudioContext;
+
 /**
  * Audio context.
  */
