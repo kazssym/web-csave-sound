@@ -48,7 +48,7 @@ async function doPlay()
 
     let csaveNode = new AudioWorkletNode(audioContext, "csave-processor", {
         processorOptions: {
-            bitRate: 600,
+            bitRate: 1200,
             data: data,
         },
     });
