@@ -29,9 +29,9 @@
 const RENDER_QUANTUM = 128;
 
 /**
- * Default bit rate.
+ * Default symbol rate.
  */
-const DEFAULT_BIT_RATE = 1200;
+const DEFAULT_SYMBOL_RATE = 1200;
 
 /**
  * Default value for the amplitude.
@@ -54,9 +54,9 @@ export class CsaveProcessor extends AudioWorkletProcessor
             processorOptions = {};
         }
 
-        this._bitRate = processorOptions.bitRate;
-        if (this._bitRate == null || this._bitRate == 0) {
-            this._bitRate = DEFAULT_BIT_RATE;
+        this._symbolRate = processorOptions.symbolRate;
+        if (this._symbolRate == null || this._symbolRate == 0) {
+            this._symbolRate = DEFAULT_SYMBOL_RATE;
         }
 
         this._bytes = processorOptions.data;
@@ -92,7 +92,7 @@ export class CsaveProcessor extends AudioWorkletProcessor
                 let increment = this._increments[byte & 0x1];
                 byte >>= 1;
 
-                duration += sampleRate / this._bitRate;
+                duration += sampleRate / this._symbolRate;
                 while (duration > 0) {
                     duration -= 1;
                     yield this._advance(increment);
