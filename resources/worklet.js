@@ -68,7 +68,7 @@ export class CsaveProcessor extends AudioWorkletProcessor
         this._increments = [1200 / sampleRate, 2400 / sampleRate];
 
         this._phase = 0;
-        this._wave = this._generateWave(2 * sampleRate, this._bytes);
+        this._wave = this._generateWave(2.0, this._bytes);
     }
 
     _advance(increment)
@@ -79,9 +79,9 @@ export class CsaveProcessor extends AudioWorkletProcessor
         return sample;
     }
 
-    *_generateWave(preambleDuration, bytes)
+    * _generateWave(preambleDuration, bytes)
     {
-        let duration = preambleDuration;
+        let duration = preambleDuration * sampleRate;
         while (duration > 0) {
             duration -= 1;
             yield this._advance(this._increments[1]);
