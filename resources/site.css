@@ -10,6 +10,11 @@ body
     height: 100%;
 }
 
+.material-icons
+{
+    font-size: inherit;
+}
+
 .site-hbox
 {
     display: flex;
