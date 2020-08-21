@@ -10,6 +10,11 @@ body
     height: 100%;
 }
 
+.material-icons
+{
+    font-size: 1.5em;
+}
+
 .pure-button .material-icons
 {
     vertical-align: middle;
