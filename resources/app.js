@@ -31,12 +31,12 @@ let audioContext = new AudioContext();
 
 audioContext.audioWorklet.addModule("./resources/worklet.js");
 
-function doPlay()
+async function doPlay()
 {
     console.debug("doPlay!");
 
     if (audioContext.state == "suspended") {
-        audioContext.resume();
+        await audioContext.resume();
     }
 
     let textArea = document.getElementById("text-data");
