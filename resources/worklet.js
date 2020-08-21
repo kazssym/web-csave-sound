@@ -89,12 +89,14 @@ export class CsaveProcessor extends AudioWorkletProcessor
         for (let byte of bytes) {
             byte = 0x20 | ((byte & 0xff) << 1);
             while (byte != 0) {
+                let increment = this._increments[byte & 0x1];
+                byte >>= 1;
+
                 duration += sampleRate / this._bitRate;
                 while (duration > 0) {
                     duration -= 1;
-                    yield this._advance(this._increments[byte & 0x1]);
+                    yield this._advance(increment);
                 }
-                byte >>= 1;
             }
         }
         return 0;
