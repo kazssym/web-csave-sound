@@ -72,5 +72,9 @@ async function registerServiceWorker(name)
 }
 
 
-registerServiceWorker("./service.js");
+registerServiceWorker("./service.js")
+    .catch((error) => {
+        console.warn("failed to register a service worker: %o", error);
+    });
+
 bindCommands();
