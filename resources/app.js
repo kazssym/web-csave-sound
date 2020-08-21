@@ -35,6 +35,10 @@ function doPlay()
 {
     console.debug("doPlay!");
 
+    if (audioContext.state == "suspended") {
+        audioContext.resume();
+    }
+
     let textArea = document.getElementById("text-data");
     let data = [];
     if (textArea != null) {
