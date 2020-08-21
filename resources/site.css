@@ -10,9 +10,9 @@ body
     height: 100%;
 }
 
-.material-icons
+.pure-button .material-icons
 {
-    font-size: inherit;
+    vertical-align: middle;
 }
 
 .site-hbox
