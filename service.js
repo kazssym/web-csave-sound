@@ -32,7 +32,7 @@ self.addEventListener("install",
             try {
                 let cache = await caches.open(CACHE_NAME);
                 return await cache.addAll([
-                    "",
+                    "./",
                     "index.html",
                     "app.webmanifest",
                     "resources/decorate.js",
