@@ -31,8 +31,6 @@ let AudioContext = window.AudioContext || window.webkitAudioContext;
  */
 let audioContext = new AudioContext();
 
-audioContext.audioWorklet.addModule("./resources/worklet.js");
-
 async function doPlay()
 {
     console.debug("doPlay!");
@@ -79,4 +77,11 @@ registerServiceWorker("./service.js")
         console.warn("failed to register a service worker: %o", error);
     });
 
-bindCommands();
+if (audioContext.audioWorklet != null) {
+    audioContext.audioWorklet.addModule("./resources/worklet.js");
+
+    bindCommands();
+}
+else {
+    alert("AudioWorklet support is missing.");
+}
