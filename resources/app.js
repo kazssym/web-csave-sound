@@ -47,7 +47,7 @@ async function doPlay()
     if (form != null) {
         for (let radio of form["symbol-rate"]) {
             if (radio.checked) {
-                symbolRate = radio.value + 0;
+                symbolRate = parseFloat(radio.value);
                 console.debug("symbol rate checked: %d", symbolRate);
             }
         }
