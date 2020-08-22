@@ -28,7 +28,7 @@ const PURE_URL =
     "https://cdnjs.cloudflare.com/ajax/libs/pure/2.0.3/pure-min.css";
 
 const MATERIAL_ICONS_FONT_URL =
-    "https://fonts.googleapis.com/icon?family=Material+Icons";
+    "https://fonts.googleapis.com/icon?family=Material+Icons&display=block";
 
 /**
  * Stylesheets to be added to the document.
