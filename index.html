@@ -30,10 +30,16 @@ to cache files locally on the browser.</p>
 <a href="https://bitbucket.org/linuxfront/web-csave-audio">SCM repository</a>.</p>
 </section>
 
-<div>
+<form class="pure-form" name="demo">
 <h1>Demonstration</h1>
+<div>
+<label><input type="radio" name="symbol-rate" value="1200" checked> 1200 baud</label> /
+<label><input type="radio" name="symbol-rate" value="600" disabled> 600 baud</label>
+</div>
+<div>
 <button class="pure-button pure-button-primary app-command-play" disabled>
 <i class="material-icons">play_arrow</i> Play</button>
+</div>
 <h2>Data</h2>
 <textarea id="text-data" cols="80" rows="20">
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -43,7 +49,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
 fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
 culpa qui officia deserunt mollit anim id est laborum.
 </textarea>
-</div>
+</form>
 
 </main>
 </div>
