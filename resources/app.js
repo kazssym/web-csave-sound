@@ -42,6 +42,20 @@ async function doPlay()
         await audioContext.resume();
     }
 
+    let form = document.forms["demo"];
+    let symbolRate = 0;
+    if (form != null) {
+        for (let radio of form["symbol-rate"]) {
+            if (radio.checked) {
+                symbolRate = radio.value + 0;
+                console.debug("symbol rate checked: %d", symbolRate);
+            }
+        }
+    }
+    if (symbolRate == 0) {
+        symbolRate = 1200;
+    }
+
     let textArea = document.getElementById("text-data");
     let data = [];
     if (textArea != null) {
@@ -51,7 +65,7 @@ async function doPlay()
 
     let csaveNode = new AudioWorkletNode(audioContext, "csave-processor", {
         processorOptions: {
-            symbolRate: 1200,
+            symbolRate: symbolRate,
             data: data,
         },
     });
