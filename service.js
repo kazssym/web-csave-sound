@@ -41,6 +41,8 @@ self.addEventListener("install",
                     "resources/site.css",
                     "resources/site-theme-default.css",
                     "resources/linuxfront-icon-01-256.png",
+                    "https://cdnjs.cloudflare.com/ajax/libs/pure/2.0.3/pure-min.css",
+                    "https://fonts.googleapis.com/icon?family=Material+Icons&display=block",
                 ]);
             }
             catch (error) {
