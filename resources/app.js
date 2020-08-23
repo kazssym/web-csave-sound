@@ -36,8 +36,6 @@ let audioContext = new AudioContext();
 
 async function doPlay()
 {
-    console.debug("doPlay!");
-
     if (audioContext.state == "suspended") {
         await audioContext.resume();
     }
