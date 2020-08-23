@@ -1,7 +1,7 @@
 {
     "$schema": "https://json.schemastore.org/web-manifest",
-    "name": "csave-audio",
-    "short_name": "csave-audio",
+    "name": "CSAVE Audio",
+    "short_name": "CSAVE Audio",
     "icons": [
         {
             "src": "resources/linuxfront-icon-01-256.png",
