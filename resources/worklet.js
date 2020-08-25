@@ -43,7 +43,7 @@ const DEFAULT_AMPLITUDE = 0.125;
  *
  * @param {*} options options for the processor
  */
-export class CsaveProcessor extends AudioWorkletProcessor
+class CsaveProcessor extends AudioWorkletProcessor
 {
     constructor(options)
     {
