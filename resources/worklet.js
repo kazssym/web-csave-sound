@@ -65,6 +65,7 @@ export class CsaveProcessor extends AudioWorkletProcessor
         }
 
         this._amplitude = DEFAULT_AMPLITUDE;
+        // Ratios of the carrier frequencies to the sample rate.
         this._increments = [1200 / sampleRate, 2400 / sampleRate];
 
         this._phase = 0;
