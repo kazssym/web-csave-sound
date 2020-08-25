@@ -24,6 +24,8 @@
  * @module app.js
  */
 
+import "https://unpkg.com/audioworklet-polyfill/dist/audioworklet-polyfill.js";
+
 let AudioContext = window.AudioContext;
 if (AudioContext == null) {
     AudioContext = window.webkitAudioContext;
