@@ -126,6 +126,4 @@ class CsaveProcessor extends AudioWorkletProcessor
 }
 
 
-console.debug("sample rate: %d", sampleRate);
-
 registerProcessor("csave-processor", CsaveProcessor);
