@@ -103,7 +103,7 @@ class CsaveProcessor extends AudioWorkletProcessor
         return 0;
     }
 
-    process(inputs, outputs, /* parameters */)
+    process(_inputs, outputs, /* parameters */)
     {
         if (outputs.length >= 1) {
             let k = 0;
