@@ -26,6 +26,10 @@
 
 import "https://unpkg.com/audioworklet-polyfill/dist/audioworklet-polyfill.js";
 
+const FAKE_HEADER = Uint8Array.of(
+    0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3,
+    0x20, 0x20, 0x20, 0x20, 0x20, 0x20);
+
 let AudioContext = window.AudioContext;
 if (AudioContext == null) {
     AudioContext = window.webkitAudioContext;
@@ -67,7 +71,8 @@ async function doPlay()
         processorOptions: {
             symbolRate: symbolRate,
             records: [
-                {preamble: 2.0, bytes: data},
+                {preamble: 2.0, bytes: FAKE_HEADER},
+                {preamble: 1.0, bytes: data},
             ],
         },
     });
