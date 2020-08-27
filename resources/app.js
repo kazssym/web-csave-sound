@@ -69,13 +69,22 @@ async function doPlay()
     csaveNode.connect(audioContext.destination);
 }
 
+async function doRender(/* event */)
+{
+    // TODO: Render offline.
+}
+
 function bindCommands()
 {
-    for (let i of document.getElementsByClassName("app-command-play")) {
-        i.addEventListener("click", doPlay);
-        if (i.disabled) {
-            i.disabled = false;
+    for (let element of document.getElementsByClassName("app-command-play")) {
+        element.addEventListener("click", doPlay);
+        if (element.disabled) {
+            element.disabled = false;
         }
+    }
+    for (let element of document.getElementsByClassName("app-command-render")) {
+        element.addEventListener("click", doRender);
+        // TODO: Enable the element.
     }
 }
 
