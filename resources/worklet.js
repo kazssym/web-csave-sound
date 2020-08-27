@@ -59,9 +59,9 @@ class CsaveProcessor extends AudioWorkletProcessor
             this._symbolRate = DEFAULT_SYMBOL_RATE;
         }
 
-        this._frames = processorOptions.frames;
-        if (this._frames == null) {
-            this._frames = [];
+        this._records = processorOptions.records;
+        if (this._records == null) {
+            this._records = [];
         }
 
         this._amplitude = DEFAULT_AMPLITUDE;
@@ -69,7 +69,7 @@ class CsaveProcessor extends AudioWorkletProcessor
         this._increments = [1200 / sampleRate, 2400 / sampleRate];
 
         this._phase = 0;
-        this._wave = this._generateWave(...this._frames);
+        this._wave = this._generateWave(...this._records);
     }
 
     _advance(increment)
@@ -80,11 +80,11 @@ class CsaveProcessor extends AudioWorkletProcessor
         return sample;
     }
 
-    * _generateWave(...frames)
+    * _generateWave(...records)
     {
         let sampleCount = 0;
-        for (let frame of frames) {
-            let preamble = frame.preamble;
+        for (let record of records) {
+            let preamble = record.preamble;
             if (preamble == null) {
                 preamble = 1.0;
             }
@@ -95,7 +95,7 @@ class CsaveProcessor extends AudioWorkletProcessor
                 yield this._advance(this._increments[1]);
             }
 
-            for (let byte of frame.bytes) {
+            for (let byte of record.bytes) {
                 byte = 0x60 | ((byte & 0xff) << 1);
                 while (byte != 0) {
                     let increment = this._increments[byte & 0x1];

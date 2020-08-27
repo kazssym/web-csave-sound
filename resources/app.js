@@ -66,7 +66,7 @@ async function doPlay()
     let csaveNode = new AudioWorkletNode(audioContext, "csave-processor", {
         processorOptions: {
             symbolRate: symbolRate,
-            frames: [
+            records: [
                 {preamble: 2.0, bytes: data},
             ],
         },
