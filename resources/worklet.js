@@ -59,9 +59,9 @@ class CsaveProcessor extends AudioWorkletProcessor
             this._symbolRate = DEFAULT_SYMBOL_RATE;
         }
 
-        this._bytes = processorOptions.data;
-        if (this._bytes == null) {
-            this._bytes = [];
+        this._frames = processorOptions.frames;
+        if (this._frames == null) {
+            this._frames = [];
         }
 
         this._amplitude = DEFAULT_AMPLITUDE;
@@ -69,7 +69,7 @@ class CsaveProcessor extends AudioWorkletProcessor
         this._increments = [1200 / sampleRate, 2400 / sampleRate];
 
         this._phase = 0;
-        this._wave = this._generateWave(2.0, this._bytes);
+        this._wave = this._generateWave(...this._frames);
     }
 
     _advance(increment)
@@ -80,23 +80,32 @@ class CsaveProcessor extends AudioWorkletProcessor
         return sample;
     }
 
-    * _generateWave(preambleDuration, bytes)
+    * _generateWave(...frames)
     {
-        let duration = preambleDuration * sampleRate;
-        while (duration > 0) {
-            duration -= 1;
-            yield this._advance(this._increments[1]);
-        }
-        for (let byte of bytes) {
-            byte = 0x60 | ((byte & 0xff) << 1);
-            while (byte != 0) {
-                let increment = this._increments[byte & 0x1];
-                byte >>= 1;
+        let sampleCount = 0;
+        for (let frame of frames) {
+            let preamble = frame.preamble;
+            if (preamble == null) {
+                preamble = 1.0;
+            }
 
-                duration += sampleRate / this._symbolRate;
-                while (duration > 0) {
-                    duration -= 1;
-                    yield this._advance(increment);
+            sampleCount += preamble * sampleRate;
+            while (sampleCount > 0) {
+                sampleCount -= 1;
+                yield this._advance(this._increments[1]);
+            }
+
+            for (let byte of frame.bytes) {
+                byte = 0x60 | ((byte & 0xff) << 1);
+                while (byte != 0) {
+                    let increment = this._increments[byte & 0x1];
+                    byte >>= 1;
+
+                    sampleCount += sampleRate / this._symbolRate;
+                    while (sampleCount > 0) {
+                        sampleCount -= 1;
+                        yield this._advance(increment);
+                    }
                 }
             }
         }
