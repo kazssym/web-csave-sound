@@ -30,16 +30,6 @@ const FAKE_HEADER = Uint8Array.of(
     0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3,
     0x20, 0x20, 0x20, 0x20, 0x20, 0x20);
 
-let AudioContext = window.AudioContext;
-if (AudioContext == null) {
-    AudioContext = window.webkitAudioContext;
-}
-
-/**
- * Audio context.
- */
-let audioContext = new AudioContext();
-
 async function doPlay()
 {
     if (audioContext.state == "suspended") {
@@ -100,6 +90,16 @@ registerServiceWorker("./service.js")
     .catch((error) => {
         console.warn("failed to register a service worker: %o", error);
     });
+
+let AudioContext = window.AudioContext;
+if (AudioContext == null) {
+    AudioContext = window.webkitAudioContext;
+}
+
+/**
+ * Audio context.
+ */
+let audioContext = new AudioContext();
 
 if (audioContext.audioWorklet != null) {
     audioContext.audioWorklet.addModule("./resources/worklet.js");
