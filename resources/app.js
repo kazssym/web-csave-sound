@@ -65,7 +65,7 @@ function createCsaveNode(context)
     return csaveNode;
 }
 
-async function doPlay()
+async function doPlay(/* event */)
 {
     if (audioContext.state == "suspended") {
         await audioContext.resume();
