@@ -30,12 +30,8 @@ const FAKE_HEADER = Uint8Array.of(
     0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3, 0xd3,
     0x20, 0x20, 0x20, 0x20, 0x20, 0x20);
 
-async function doPlay()
+function createCsaveNode(context)
 {
-    if (audioContext.state == "suspended") {
-        await audioContext.resume();
-    }
-
     let form = document.forms["demo"];
     let symbolRate = 0;
     if (form != null) {
@@ -57,7 +53,7 @@ async function doPlay()
         data = encoder.encode(textArea.value);
     }
 
-    let csaveNode = new AudioWorkletNode(audioContext, "csave-processor", {
+    let csaveNode = new AudioWorkletNode(context, "csave-processor", {
         processorOptions: {
             symbolRate: symbolRate,
             records: [
@@ -66,6 +62,16 @@ async function doPlay()
             ],
         },
     });
+    return csaveNode;
+}
+
+async function doPlay()
+{
+    if (audioContext.state == "suspended") {
+        await audioContext.resume();
+    }
+
+    let csaveNode = createCsaveNode(audioContext);
     csaveNode.connect(audioContext.destination);
 }
 
