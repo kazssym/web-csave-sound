@@ -57,8 +57,8 @@ function createCsaveNode(context)
         processorOptions: {
             symbolRate: symbolRate,
             records: [
-                {preamble: 2.0, bytes: FAKE_HEADER},
-                {preamble: 1.0, bytes: data},
+                {preamble: 4.0, bytes: FAKE_HEADER},
+                {preamble: 2.0, bytes: data},
             ],
         },
     });
