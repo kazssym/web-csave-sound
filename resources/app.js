@@ -87,6 +87,8 @@ async function doRender(/* event */)
 
     let recorder = new MediaRecorder(destination.stream);
     recorder.start();
+    console.debug("started rendering");
+    console.debug("mimeType: %s", recorder.mimeType);
 }
 
 function bindCommands()
