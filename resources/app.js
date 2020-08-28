@@ -77,7 +77,16 @@ async function doPlay(/* event */)
 
 async function doRender(/* event */)
 {
-    // TODO: Render offline.
+    if (audioContext.state == "suspended") {
+        await audioContext.resume();
+    }
+
+    let csaveNode = createCsaveNode(audioContext);
+    let destination = audioContext.createMediaStreamDestination();
+    csaveNode.connect(destination);
+
+    let recorder = new MediaRecorder(destination.stream);
+    recorder.start();
 }
 
 function bindCommands()
