@@ -88,8 +88,11 @@ async function doRender(/* event */)
     let recorder = new MediaRecorder(destination.stream, {
         mimeType: "audio/ogg",
     });
+    recorder.addEventListener("stop", () => {
+        console.debug("stopped recording");
+    });
     recorder.start();
-    console.debug("started rendering");
+    console.debug("started recording");
     console.debug("mimeType: %s", recorder.mimeType);
 }
 
