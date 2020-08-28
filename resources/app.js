@@ -82,7 +82,7 @@ async function doRender(/* event */)
     }
 
     let csaveNode = createCsaveNode(audioContext);
-    let destination = new MediaStreamAudioDestinationNode(audioContext);
+    let destination = audioContext.createMediaStreamDestination();
     csaveNode.connect(destination);
 
     let recorder = new MediaRecorder(destination.stream, {
