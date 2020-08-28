@@ -26,8 +26,6 @@
 
 /* global sampleRate */
 
-const RENDER_QUANTUM = 128;
-
 /**
  * Default symbol rate.
  */
@@ -116,7 +114,7 @@ class CsaveProcessor extends AudioWorkletProcessor
     {
         if (outputs.length >= 1) {
             let k = 0;
-            while (k < RENDER_QUANTUM) {
+            while (k < outputs[0][0].length) {
                 let {value, done} = this._wave.next();
                 if (done) {
                     break;
