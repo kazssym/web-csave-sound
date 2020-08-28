@@ -86,7 +86,7 @@ async function doRender(/* event */)
     csaveNode.connect(destination);
 
     let recorder = new MediaRecorder(destination.stream, {
-        mimeType: "audio/mp3",
+        mimeType: "audio/ogg",
     });
     recorder.start();
     console.debug("started rendering");
