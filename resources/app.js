@@ -65,14 +65,40 @@ function createCsaveNode(context)
     return csaveNode;
 }
 
-async function doPlay(/* event */)
+/**
+ * Audio renderers.
+ */
+class Renderer
 {
-    if (audioContext.state == "suspended") {
-        await audioContext.resume();
+    /**
+     * Constructs an audio renderer object.
+     *
+     * @param {AudioContext} context an audio context
+     */
+    constructor(context)
+    {
+        this._audioContext = context;
     }
 
-    let csaveNode = createCsaveNode(audioContext);
-    csaveNode.connect(audioContext.destination);
+    get audioContext()
+    {
+        return this._audioContext;
+    }
+
+    async play()
+    {
+        if (this.audioContext.state == "suspended") {
+            await this.audioContext.resume();
+        }
+
+        let csaveNode = createCsaveNode(this.audioContext);
+        csaveNode.connect(this.audioContext.destination);
+    }
+}
+
+function doPlay(/* event */)
+{
+    renderer.play();
 }
 
 async function doRender(/* event */)
@@ -132,6 +158,7 @@ if (AudioContext == null) {
     AudioContext = window.webkitAudioContext;
 }
 
+
 /**
  * Audio context.
  */
@@ -145,3 +172,5 @@ if (audioContext.audioWorklet != null) {
 else {
     alert("AudioWorklet support is missing.");
 }
+
+let renderer = new Renderer(audioContext);
