@@ -128,7 +128,9 @@ class CsaveProcessor extends AudioWorkletProcessor
                 }
                 k++;
             }
-            return k > 0;
+            if (k > 0) {
+                return true;
+            }
         }
         return false;
     }
