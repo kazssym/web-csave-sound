@@ -99,7 +99,9 @@ function bindCommands()
     }
     for (let element of document.getElementsByClassName("app-command-render")) {
         element.addEventListener("click", doRender);
-        // TODO: Enable the element.
+        if (element.disabled) {
+            element.disabled = false;
+        }
     }
 }
 
