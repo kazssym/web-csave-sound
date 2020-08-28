@@ -85,7 +85,9 @@ async function doRender(/* event */)
     let destination = audioContext.createMediaStreamDestination();
     csaveNode.connect(destination);
 
-    let recorder = new MediaRecorder(destination.stream);
+    let recorder = new MediaRecorder(destination.stream, {
+        mimeType: "audio/mp3",
+    });
     recorder.start();
     console.debug("started rendering");
     console.debug("mimeType: %s", recorder.mimeType);
