@@ -135,9 +135,9 @@ function bindCommands()
     }
     for (let element of document.getElementsByClassName("app-command-render")) {
         element.addEventListener("click", doRender);
-        if (element.disabled) {
-            element.disabled = false;
-        }
+        // if (element.disabled) {
+        //     element.disabled = false;
+        // }
     }
 }
 
