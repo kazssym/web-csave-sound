@@ -106,6 +106,16 @@ class Renderer
         csaveNode.port.start();
 
         csaveNode.connect(this.audioContext.destination);
+
+        let recorderNode = new MediaStreamAudioDestinationNode(this.audioContext);
+        csaveNode.connect(recorderNode);
+
+        let recorder = new MediaRecorder(recorderNode.stream);
+        recorder.addEventListener("dataavailable", () => {
+            // TODO: record data.
+            console.debug("recording data available");
+        });
+        recorder.start(1000);
     }
 }
 
