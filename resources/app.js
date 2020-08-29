@@ -97,10 +97,18 @@ class Renderer
     {
         await this._initAudioContext();
 
+        let audioType = "audio/basic";
+        if (MediaRecorder.isTypeSupported("audio/mpeg")) {
+            audioType = "audio/mpeg";
+        }
+        else if (MediaRecorder.isTypeSupported("audio/ogg")) {
+            audioType = "audio/ogg";
+        }
+
         let csaveNode = createCsaveNode(this.audioContext);
         let recorderNode = new MediaStreamAudioDestinationNode(this.audioContext);
         let recorder = new MediaRecorder(recorderNode.stream, {
-            mimeType: "audio/ogg",
+            mimeType: audioType,
         });
         let chunks = [];
 
@@ -119,7 +127,7 @@ class Renderer
             console.debug("stopped recording");
 
             let blob = new Blob(chunks, {
-                type: "audio/ogg",
+                type: audioType,
             });
 
             let link = document.getElementById("download");
