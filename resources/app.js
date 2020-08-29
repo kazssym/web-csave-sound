@@ -114,30 +114,6 @@ function doPlay(/* event */)
     renderer.play();
 }
 
-async function doRender(/* event */)
-{
-    // if (audioContext.state == "suspended") {
-    //     await audioContext.resume();
-    // }
-
-    // let csaveNode = createCsaveNode(audioContext);
-    // let destination = audioContext.createMediaStreamDestination();
-    // csaveNode.connect(destination);
-
-    // let recorder = new MediaRecorder(destination.stream, {
-    //     mimeType: "audio/ogg",
-    // });
-    // recorder.addEventListener("dataavailable", () => {
-    //     console.debug("data available");
-    // });
-    // recorder.addEventListener("stop", () => {
-    //     console.debug("stopped recording");
-    // });
-    // recorder.start(1000);
-    // console.debug("started recording");
-    // console.debug("mimeType: %s", recorder.mimeType);
-}
-
 function bindCommands()
 {
     for (let element of document.getElementsByClassName("app-command-play")) {
@@ -145,12 +121,6 @@ function bindCommands()
         if (element.disabled) {
             element.disabled = false;
         }
-    }
-    for (let element of document.getElementsByClassName("app-command-render")) {
-        element.addEventListener("click", doRender);
-        // if (element.disabled) {
-        //     element.disabled = false;
-        // }
     }
 }
 
