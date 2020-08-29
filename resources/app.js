@@ -97,7 +97,7 @@ class Renderer
     {
         await this._initAudioContext();
 
-        let audioType = "audio/basic";
+        let audioType = "audio/webm";
         if (MediaRecorder.isTypeSupported("audio/mpeg")) {
             audioType = "audio/mpeg";
         }
