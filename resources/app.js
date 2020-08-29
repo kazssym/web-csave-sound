@@ -78,14 +78,14 @@ class Renderer
         this._audioContext = null;
     }
 
-    _initAudioContext()
+    async _initAudioContext()
     {
         if (this._audioContext != null) {
             this._audioContext.close();
         }
 
         this._audioContext = new AudioContext();
-        this._audioContext.audioWorklet.addModule("./resources/worklet.js");
+        await this._audioContext.audioWorklet.addModule("./resources/worklet.js");
     }
 
     get audioContext()
@@ -95,7 +95,7 @@ class Renderer
 
     async play()
     {
-        this._initAudioContext();
+        await this._initAudioContext();
 
         let csaveNode = createCsaveNode(this.audioContext);
         csaveNode.connect(this.audioContext.destination);
