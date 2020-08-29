@@ -112,14 +112,17 @@ class Renderer
         });
         csaveNode.port.start();
 
+        csaveNode.connect(this.audioContext.destination);
+        csaveNode.connect(recorderNode);
+
+        recorder.addEventListener("stop", () => {
+            console.debug("stopped recording");
+        });
         recorder.addEventListener("dataavailable", (event) => {
             console.debug("recording data available");
             chunks.push(event.data);
         });
         recorder.start(1000);
-
-        csaveNode.connect(this.audioContext.destination);
-        csaveNode.connect(recorderNode);
     }
 }
 
