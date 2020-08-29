@@ -67,6 +67,7 @@ class CsaveProcessor extends AudioWorkletProcessor
         this._increments = [1200 / sampleRate, 2400 / sampleRate];
 
         this._phase = 0;
+        this._running = true;
         this._wave = this._generateWave(...this._records);
     }
 
@@ -112,7 +113,7 @@ class CsaveProcessor extends AudioWorkletProcessor
 
     process(_inputs, outputs, /* parameters */)
     {
-        if (outputs.length >= 1) {
+        if (outputs.length >= 1 && this._running) {
             let k = 0;
             while (k < outputs[0][0].length) {
                 let {value, done} = this._wave.next();
@@ -129,6 +130,9 @@ class CsaveProcessor extends AudioWorkletProcessor
             if (k > 0) {
                 return true;
             }
+
+            this._running = false;
+            this.port.postMessage("stopped");
         }
         return false;
     }
