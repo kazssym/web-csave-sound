@@ -72,12 +72,20 @@ class Renderer
 {
     /**
      * Constructs an audio renderer object.
-     *
-     * @param {AudioContext} context an audio context
      */
-    constructor(context)
+    constructor()
     {
-        this._audioContext = context;
+        this._audioContext = null;
+    }
+
+    _initAudioContext()
+    {
+        if (this._audioContext != null) {
+            this._audioContext.close();
+        }
+
+        this._audioContext = new AudioContext();
+        this._audioContext.audioWorklet.addModule("./resources/worklet.js");
     }
 
     get audioContext()
@@ -87,9 +95,7 @@ class Renderer
 
     async play()
     {
-        if (this.audioContext.state == "suspended") {
-            await this.audioContext.resume();
-        }
+        this._initAudioContext();
 
         let csaveNode = createCsaveNode(this.audioContext);
         csaveNode.connect(this.audioContext.destination);
@@ -103,26 +109,26 @@ function doPlay(/* event */)
 
 async function doRender(/* event */)
 {
-    if (audioContext.state == "suspended") {
-        await audioContext.resume();
-    }
+    // if (audioContext.state == "suspended") {
+    //     await audioContext.resume();
+    // }
 
-    let csaveNode = createCsaveNode(audioContext);
-    let destination = audioContext.createMediaStreamDestination();
-    csaveNode.connect(destination);
+    // let csaveNode = createCsaveNode(audioContext);
+    // let destination = audioContext.createMediaStreamDestination();
+    // csaveNode.connect(destination);
 
-    let recorder = new MediaRecorder(destination.stream, {
-        mimeType: "audio/ogg",
-    });
-    recorder.addEventListener("dataavailable", () => {
-        console.debug("data available");
-    });
-    recorder.addEventListener("stop", () => {
-        console.debug("stopped recording");
-    });
-    recorder.start(1000);
-    console.debug("started recording");
-    console.debug("mimeType: %s", recorder.mimeType);
+    // let recorder = new MediaRecorder(destination.stream, {
+    //     mimeType: "audio/ogg",
+    // });
+    // recorder.addEventListener("dataavailable", () => {
+    //     console.debug("data available");
+    // });
+    // recorder.addEventListener("stop", () => {
+    //     console.debug("stopped recording");
+    // });
+    // recorder.start(1000);
+    // console.debug("started recording");
+    // console.debug("mimeType: %s", recorder.mimeType);
 }
 
 function bindCommands()
@@ -158,22 +164,11 @@ if (AudioContext == null) {
     AudioContext = window.webkitAudioContext;
 }
 
-
-/**
- * Audio context.
- */
-let audioContext = new AudioContext();
-audioContext.addEventListener("statechange", (/* event */) => {
-    console.debug("AudioContext state changed: %s", audioContext.state);
-});
-
-if (audioContext.audioWorklet != null) {
-    audioContext.audioWorklet.addModule("./resources/worklet.js");
-
+if ("audioWorklet" in AudioContext.prototype) {
     bindCommands();
 }
 else {
     alert("AudioWorklet support is missing.");
 }
 
-let renderer = new Renderer(audioContext);
+let renderer = new Renderer();
