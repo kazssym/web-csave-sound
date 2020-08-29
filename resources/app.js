@@ -163,6 +163,9 @@ if (AudioContext == null) {
  * Audio context.
  */
 let audioContext = new AudioContext();
+audioContext.addEventListener("statechange", (/* event */) => {
+    console.debug("AudioContext state changed: %s", audioContext.state);
+});
 
 if (audioContext.audioWorklet != null) {
     audioContext.audioWorklet.addModule("./resources/worklet.js");
