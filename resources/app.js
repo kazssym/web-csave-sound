@@ -98,24 +98,28 @@ class Renderer
         await this._initAudioContext();
 
         let csaveNode = createCsaveNode(this.audioContext);
+        let recorderNode = new MediaStreamAudioDestinationNode(this.audioContext);
+        let recorder = new MediaRecorder(recorderNode.stream, {
+            mimeType: "audio/ogg",
+        });
+        let chunks = [];
+
         csaveNode.port.addEventListener("message", (event) => {
             if (event.data == "stopped") {
+                recorder.stop();
                 csaveNode.disconnect();
             }
         });
         csaveNode.port.start();
 
-        csaveNode.connect(this.audioContext.destination);
-
-        let recorderNode = new MediaStreamAudioDestinationNode(this.audioContext);
-        csaveNode.connect(recorderNode);
-
-        let recorder = new MediaRecorder(recorderNode.stream);
-        recorder.addEventListener("dataavailable", () => {
-            // TODO: record data.
+        recorder.addEventListener("dataavailable", (event) => {
             console.debug("recording data available");
+            chunks.push(event.data);
         });
         recorder.start(1000);
+
+        csaveNode.connect(this.audioContext.destination);
+        csaveNode.connect(recorderNode);
     }
 }
 
