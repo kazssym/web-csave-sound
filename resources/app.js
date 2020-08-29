@@ -117,6 +117,13 @@ class Renderer
 
         recorder.addEventListener("stop", () => {
             console.debug("stopped recording");
+
+            let blob = new Blob(chunks, {
+                type: "audio/ogg",
+            });
+
+            let link = document.getElementById("download");
+            link.href = URL.createObjectURL(blob);
         });
         recorder.addEventListener("dataavailable", (event) => {
             console.debug("recording data available");
