@@ -98,6 +98,10 @@ class Renderer
         await this._initAudioContext();
 
         let csaveNode = createCsaveNode(this.audioContext);
+        csaveNode.port.addEventListener("message", (event) => {
+            console.debug("got message: %o", event.data);
+        });
+
         csaveNode.connect(this.audioContext.destination);
     }
 }
