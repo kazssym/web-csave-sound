@@ -101,6 +101,7 @@ class Renderer
         csaveNode.port.addEventListener("message", (event) => {
             console.debug("got message: %o", event.data);
         });
+        csaveNode.port.start();
 
         csaveNode.connect(this.audioContext.destination);
     }
