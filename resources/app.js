@@ -99,7 +99,9 @@ class Renderer
 
         let csaveNode = createCsaveNode(this.audioContext);
         csaveNode.port.addEventListener("message", (event) => {
-            console.debug("got message: %o", event.data);
+            if (event.data == "stopped") {
+                csaveNode.disconnect();
+            }
         });
         csaveNode.port.start();
 
