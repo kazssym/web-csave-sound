@@ -121,14 +121,7 @@ class Renderer
         csaveNode.connect(recorderNode);
 
         recorder.addEventListener("stop", () => {
-            console.debug("stopped recording");
-
-            let blob = new Blob(chunks, {
-                type: mediaType,
-            });
-
-            let link = document.getElementById("download");
-            link.href = URL.createObjectURL(blob);
+            produceFile(chunks, mediaType);
         });
         recorder.addEventListener("dataavailable", (event) => {
             console.debug("recording data available");
@@ -136,6 +129,17 @@ class Renderer
         });
         recorder.start(1000);
     }
+}
+
+function produceFile(chunks, mediaType)
+{
+    let blob = new Blob(chunks, {
+        type: mediaType,
+    });
+
+    let link = document.getElementById("download");
+    link.href = URL.createObjectURL(blob);
+    link.classList.remove("pure-button-disabled");
 }
 
 function doPlay(/* event */)
