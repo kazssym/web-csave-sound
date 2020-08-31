@@ -98,9 +98,6 @@ class Renderer
         await this._initAudioContext();
 
         let mediaType = "audio/webm";
-        if (MediaRecorder.isTypeSupported("audio/mpeg")) {
-            mediaType = "audio/mpeg";
-        }
 
         let csaveNode = createCsaveNode(this.audioContext);
         csaveNode.connect(this.audioContext.destination);
