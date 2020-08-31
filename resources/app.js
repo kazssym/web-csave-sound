@@ -103,31 +103,37 @@ class Renderer
         }
 
         let csaveNode = createCsaveNode(this.audioContext);
-        let recorderNode = new MediaStreamAudioDestinationNode(this.audioContext);
-        let recorder = new MediaRecorder(recorderNode.stream, {
-            mimeType: mediaType,
-        });
-        let chunks = [];
+        csaveNode.connect(this.audioContext.destination);
 
+        let recorder = null;
         csaveNode.port.addEventListener("message", (event) => {
             if (event.data == "stopped") {
-                recorder.stop();
+                if (recorder != null) {
+                    recorder.stop();
+                }
                 csaveNode.disconnect();
             }
         });
         csaveNode.port.start();
 
-        csaveNode.connect(this.audioContext.destination);
-        csaveNode.connect(recorderNode);
+        if ("MediaRecorder" in window) {
+            let recorderNode = new MediaStreamAudioDestinationNode(this.audioContext);
+            csaveNode.connect(recorderNode);
 
-        recorder.addEventListener("stop", () => {
-            produceFile(chunks, mediaType);
-        });
-        recorder.addEventListener("dataavailable", (event) => {
-            console.debug("recording data available");
-            chunks.push(event.data);
-        });
-        recorder.start(1000);
+            recorder = new MediaRecorder(recorderNode.stream, {
+                mimeType: mediaType,
+            });
+
+            let chunks = [];
+            recorder.addEventListener("dataavailable", (event) => {
+                console.debug("recording data available");
+                chunks.push(event.data);
+            });
+            recorder.addEventListener("stop", () => {
+                produceFile(chunks, mediaType);
+            });
+            recorder.start(1000);
+        }
     }
 }
 
