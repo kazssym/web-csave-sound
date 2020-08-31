@@ -19,7 +19,9 @@
 // This file is a module script and shall be in strict mode by default.
 
 /**
- * ES module for the audio worklet processors.
+ * Module script for the audio worklet processors.
+ * This script must be used with an
+ * {@link https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet AudioWorklet} object.
  *
  * @module worklet.js
  */
@@ -27,7 +29,7 @@
 /* global sampleRate */
 
 /**
- * Default symbol rate.
+ * Default value for the symbol rate.
  */
 const DEFAULT_SYMBOL_RATE = 1200;
 
@@ -37,12 +39,21 @@ const DEFAULT_SYMBOL_RATE = 1200;
 const DEFAULT_AMPLITUDE = 0.125;
 
 /**
- * Audio worklet processor that generates classic *CSAVE* sound.
+ * Audio worklet processors that produce *CSAVE sounds*.
  *
- * @param {*} options options for the processor
+ * The symbol rate may be specified by `options.processorOptions.symbolRate`.
+ * Its default value is 1200 (symbols per second).
+ *
+ * The amplitude may by specified by `options.processorOptions.amplitude`.
+ * Its default value is 0.125, which is -18 dBFS.
  */
 class CsaveProcessor extends AudioWorkletProcessor
 {
+    /**
+     * Constructs an audio worklet processor.
+     *
+     * @param {*} options options for the new processor
+     */
     constructor(options)
     {
         super(options);
@@ -71,6 +82,12 @@ class CsaveProcessor extends AudioWorkletProcessor
         this._wave = this._generateWave(...this._records);
     }
 
+    /**
+     * Advances the phase returning a wave sample.
+     *
+     * @param {number} increment an increment of the phase to advance
+     * @return {number} a wave sample
+     */
     _advance(increment)
     {
         let sample = this._amplitude * Math.sin(2 * Math.PI * this._phase);
@@ -79,6 +96,12 @@ class CsaveProcessor extends AudioWorkletProcessor
         return sample;
     }
 
+    /**
+     * Returns a generator function for wave samples.
+     *
+     * @param  {...*} records an array of record descriptions
+     * @return {GeneratorFunction<number>} a generator function
+     */
     * _generateWave(...records)
     {
         let sampleCount = 0;
@@ -137,6 +160,5 @@ class CsaveProcessor extends AudioWorkletProcessor
         return false;
     }
 }
-
 
 registerProcessor("csave-processor", CsaveProcessor);
