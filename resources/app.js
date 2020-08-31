@@ -173,8 +173,8 @@ if ("audioWorklet" in AudioContext.prototype) {
     let audioContext = new AudioContext();
     audioContext.audioWorklet.addModule("./resources/worklet.js")
         .then(() => {
-            bindCommands();
             renderer = new Renderer(audioContext);
+            bindCommands();
         });
 }
 else {
