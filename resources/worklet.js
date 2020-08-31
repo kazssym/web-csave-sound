@@ -52,7 +52,7 @@ class CsaveProcessor extends AudioWorkletProcessor
     /**
      * Constructs an audio worklet processor.
      *
-     * @param {*} options options for the new processor
+     * @param {Object} options options for the new processor
      */
     constructor(options)
     {
@@ -99,7 +99,9 @@ class CsaveProcessor extends AudioWorkletProcessor
     /**
      * Returns a generator function for wave samples.
      *
-     * @param  {...*} records an array of record descriptions
+     * @param {...Object} records record descriptions
+     * @param {number[]} records[].bytes the data for a record
+     * @param {number} [records[].preamble=1.0] the preamble duration for a record
      * @return {GeneratorFunction<number>} a generator function
      */
     * _generateWave(...records)
