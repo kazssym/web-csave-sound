@@ -82,10 +82,12 @@ class Renderer
     {
         if (this._audioContext != null) {
             this._audioContext.close();
+            this._audioContext = null;
         }
 
         this._audioContext = new AudioContext();
         await this._audioContext.audioWorklet.addModule("./resources/worklet.js");
+        await this._audioContext.resume();
     }
 
     get audioContext()
