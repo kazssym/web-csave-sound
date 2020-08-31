@@ -72,22 +72,12 @@ class Renderer
 {
     /**
      * Constructs an audio renderer object.
+     *
+     * @param {AudioContext} context an audio context
      */
-    constructor()
+    constructor(context)
     {
-        this._audioContext = null;
-    }
-
-    async _initAudioContext()
-    {
-        if (this._audioContext != null) {
-            this._audioContext.close();
-            this._audioContext = null;
-        }
-
-        this._audioContext = new AudioContext();
-        await this._audioContext.audioWorklet.addModule("./resources/worklet.js");
-        await this._audioContext.resume();
+        this._audioContext = context;
     }
 
     get audioContext()
@@ -97,9 +87,7 @@ class Renderer
 
     async play()
     {
-        await this._initAudioContext();
-
-        let mediaType = "audio/webm";
+        await this.audioContext.resume();
 
         let csaveNode = createCsaveNode(this.audioContext);
         csaveNode.connect(this.audioContext.destination);
@@ -119,6 +107,7 @@ class Renderer
             let recorderNode = new MediaStreamAudioDestinationNode(this.audioContext);
             csaveNode.connect(recorderNode);
 
+            let mediaType = "audio/webm";
             recorder = new MediaRecorder(recorderNode.stream, {
                 mimeType: mediaType,
             });
@@ -179,11 +168,16 @@ if (AudioContext == null) {
     AudioContext = window.webkitAudioContext;
 }
 
+let renderer = null;
 if ("audioWorklet" in AudioContext.prototype) {
-    bindCommands();
+    let audioContext = new AudioContext();
+    audioContext.audioWorklet.addModule("./resources/worklet.js")
+        .then(() => {
+            bindCommands();
+            renderer = new Renderer(audioContext);
+        });
 }
 else {
     alert("AudioWorklet support is missing.");
 }
 
-let renderer = new Renderer();
