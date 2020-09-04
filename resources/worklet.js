@@ -16,17 +16,19 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-// This file is a module script and shall be in strict mode by default.
-
 /* global sampleRate */
 
 /**
  * Module script for the audio worklet processors.
- * This script must be used with an
- * {@link https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet AudioWorklet} object.
+ * This file must be imported by an
+ * {@link https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet AudioWorklet}
+ * object.
  *
  * @module worklet.js
  */
+
+// This file is a module script and shall be in strict mode by default.
+"";
 
 /**
  * Default value for the symbol rate.
@@ -83,7 +85,7 @@ class CsaveProcessor extends AudioWorkletProcessor
     }
 
     /**
-     * Advances the phase returning a wave sample.
+     * Advances the phase to return a wave sample.
      *
      * @param {number} increment an increment of the phase to advance
      * @return {number} a wave sample
@@ -102,7 +104,7 @@ class CsaveProcessor extends AudioWorkletProcessor
      * @param {...Object} records record descriptions
      * @param {number[]} records[].bytes the data for a record
      * @param {number} [records[].preamble=1.0] the preamble duration for a record
-     * @return {GeneratorFunction<number>} a generator function
+     * @return {GeneratorFunction<number>} a generator function to yield wave samples
      */
     * _generateWave(...records)
     {
