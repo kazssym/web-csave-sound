@@ -18,6 +18,8 @@
 
 // This file is a module script and shall be in strict mode by default.
 
+/* global sampleRate */
+
 /**
  * Module script for the audio worklet processors.
  * This script must be used with an
@@ -25,8 +27,6 @@
  *
  * @module worklet.js
  */
-
-/* global sampleRate */
 
 /**
  * Default value for the symbol rate.
