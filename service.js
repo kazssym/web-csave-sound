@@ -26,7 +26,7 @@
 
 "use strict";
 
-const CACHE_NAME = "20200831.4";
+const CACHE_NAME = "20200904.1";
 
 self.addEventListener("install",
     (event) => {
