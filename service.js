@@ -43,6 +43,7 @@ self.addEventListener("install",
                     "resources/site.css",
                     "resources/site-theme-default.css",
                     "resources/linuxfront-icon-01-256.png",
+                    "resources/linuxfront-icon-01-512-full.png",
                     "https://cdnjs.cloudflare.com/ajax/libs/pure/2.0.3/pure-min.css",
                     "https://fonts.googleapis.com/icon?family=Material+Icons&display=block",
                 ]);
