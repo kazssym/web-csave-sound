@@ -4,7 +4,7 @@
     "short_name": "CSAVE Audio",
     "icons": [
         {
-            "src": "resources/linuxfront-icon-01-256.png",
+            "src": "resources/linuxfront-icon-01-256-full.png",
             "sizes": "256x256"
         },
         {
