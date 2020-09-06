@@ -5,11 +5,13 @@
     "icons": [
         {
             "src": "resources/linuxfront-icon-01-256-full.png",
-            "sizes": "256x256"
+            "sizes": "256x256",
+            "purpose": "any maskable"
         },
         {
             "src": "resources/linuxfront-icon-01-512-full.png",
-            "sizes": "512x512"
+            "sizes": "512x512",
+            "purpose": "any maskable"
         }
     ],
     "start_url": "./",
