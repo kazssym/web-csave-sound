@@ -31,26 +31,21 @@ const CACHE_NAME = "20200908.1";
 self.addEventListener("install",
     (event) => {
         let prepareCache = async () => {
-            try {
-                let cache = await caches.open(CACHE_NAME);
-                return await cache.addAll([
-                    "./",
-                    "index.html",
-                    "app.webmanifest",
-                    "resources/decorate.js",
-                    "resources/app.js",
-                    "resources/worklet.js",
-                    "resources/site.css",
-                    "resources/site-theme-default.css",
-                    "resources/linuxfront-icon-01-256-full.png",
-                    "resources/linuxfront-icon-01-512-full.png",
-                    "https://cdnjs.cloudflare.com/ajax/libs/pure/2.0.3/pure-min.css",
-                    "https://fonts.googleapis.com/icon?family=Material+Icons&display=block",
-                ]);
-            }
-            catch (error) {
-                console.warn("caught an error: %o", error);
-            }
+            let cache = await caches.open(CACHE_NAME);
+            return await cache.addAll([
+                "./",
+                "index.html",
+                "app.webmanifest",
+                "resources/decorate.js",
+                "resources/app.js",
+                "resources/worklet.js",
+                "resources/site.css",
+                "resources/site-theme-default.css",
+                "resources/linuxfront-icon-01-256-full.png",
+                "resources/linuxfront-icon-01-512-full.png",
+                "https://cdnjs.cloudflare.com/ajax/libs/pure/2.0.3/pure-min.css",
+                "https://fonts.googleapis.com/icon?family=Material+Icons&display=block",
+            ]);
         };
         event.waitUntil(prepareCache());
     }
