@@ -12,12 +12,8 @@ body
 
 .material-icons
 {
-    font-size: 1.5em;
-}
-
-.pure-button .material-icons
-{
-    vertical-align: middle;
+    vertical-align: text-bottom;
+    font-size: 150%;
 }
 
 .site-hbox
