@@ -157,27 +157,39 @@ async function registerServiceWorker(name)
     console.debug("registered service worker: %o", registration);
 }
 
+/**
+ * Creates a custom AudioContext object.
+ *
+ * @return {Promise<AudioContext>}
+ */
+async function createAudioContext()
+{
+    let AudioContext = window.AudioContext;
+    if (AudioContext == null) {
+        AudioContext = window.webkitAudioContext;
+    }
+
+    if ("audioWorklet" in AudioContext.prototype) {
+        let context = new AudioContext();
+        await context.audioWorklet.addModule("./resources/worklet.js");
+        return context;
+    }
+    throw new Error("AudioWorklet support is missing.");
+}
+
+// Initialization.
 
 registerServiceWorker("./service.js")
     .catch((error) => {
         console.warn("failed to register a service worker: %o", error);
     });
 
-let AudioContext = window.AudioContext;
-if (AudioContext == null) {
-    AudioContext = window.webkitAudioContext;
-}
-
 let renderer = null;
-if ("audioWorklet" in AudioContext.prototype) {
-    let audioContext = new AudioContext();
-    audioContext.audioWorklet.addModule("./resources/worklet.js")
-        .then(() => {
-            renderer = new Renderer(audioContext);
-            bindCommands();
-        });
-}
-else {
-    alert("AudioWorklet support is missing.");
-}
-
+createAudioContext()
+    .then((context) => {
+        renderer = new Renderer(context);
+        bindCommands();
+    })
+    .catch((error) => {
+        alert(error);
+    });
