@@ -147,12 +147,11 @@ class CsaveProcessor extends AudioWorkletProcessor
                 if (done) {
                     break;
                 }
-                for (let output of outputs) {
-                    for (let channel of output) {
+                outputs.forEach((output) => {
+                    output.forEach((channel) => {
                         channel[k] = value;
-                    }
-                }
-                k++;
+                    });
+                });
             }
             if (k > 0) {
                 return true;
