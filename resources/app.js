@@ -191,5 +191,5 @@ createAudioContext()
         bindCommands();
     })
     .catch((error) => {
-        alert(error);
+        window.alert(error);
     });
