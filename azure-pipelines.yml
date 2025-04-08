@@ -9,7 +9,7 @@ variables:
   deploy.azureSubscription: linuxfront-csave-audio
   deploy.appName: linuxfront-csave-audio
 trigger:
-  - master
+  - main
 stages:
   - stage: Default
     jobs:
