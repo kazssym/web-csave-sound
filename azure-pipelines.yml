@@ -31,6 +31,9 @@ stages:
   - stage: Deployment
     dependsOn:
       - Default
+
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+
     jobs:
       - deployment: Deploy
         pool:
