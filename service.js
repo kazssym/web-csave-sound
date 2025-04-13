@@ -24,7 +24,7 @@
  * @module service.js
  */
 
-const CACHE_NAME = "20250413.2";
+const CACHE_NAME = "20250413.3";
 
 self.addEventListener("install",
     (event) => {

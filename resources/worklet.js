@@ -122,7 +122,7 @@ class CsaveProcessor extends AudioWorkletProcessor
             }
 
             for (let byte of record.bytes) {
-                byte = 0x60 | ((byte & 0xff) << 1);
+                byte = (0x300 | (byte & 0xff)) << 1;
                 while (byte != 0) {
                     let increment = this._increments[byte & 0x1];
                     byte >>= 1;
