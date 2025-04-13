@@ -6,10 +6,10 @@
 # this notice are preserved.  This file is offered as-is, without any warranty.
 ---
 variables:
-  deploy.azureSubscription: linuxfront-csave-audio
-  deploy.appName: linuxfront-csave-audio
+  - group: web-csave-audio
+
 trigger:
-  - master
+  - main
 stages:
   - stage: Default
     jobs:
