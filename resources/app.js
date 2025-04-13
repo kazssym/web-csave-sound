@@ -153,7 +153,7 @@ function bindCommands()
 
 async function registerServiceWorker(name)
 {
-    let registration = await navigator.serviceWorker.register(name);
+    const registration = await navigator.serviceWorker.register(name, { type: "module" });
     console.debug("registered service worker: %o", registration);
 }
 
