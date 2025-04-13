@@ -160,21 +160,17 @@ async function registerServiceWorker(name)
 /**
  * Creates a custom AudioContext object.
  *
+ * This function must be called on a user interaction.
+ *
  * @return {Promise<AudioContext>}
+ * @throws {Error}
  */
 async function createAudioContext()
 {
-    let AudioContext = window.AudioContext;
-    if (AudioContext == null) {
-        AudioContext = window.webkitAudioContext;
-    }
-
-    if ("audioWorklet" in AudioContext.prototype) {
-        let context = new AudioContext();
-        await context.audioWorklet.addModule("./resources/worklet.js");
-        return context;
-    }
-    throw new Error("AudioWorklet support is missing.");
+    // `window.webkitAudioContext` is no longer supported.
+    const context = new AudioContext();
+    await context.audioWorklet.addModule("resources/worklet.js");
+    return context;
 }
 
 // Initialization.
