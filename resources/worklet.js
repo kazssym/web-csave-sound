@@ -121,11 +121,12 @@ class CsaveProcessor extends AudioWorkletProcessor
                 yield this._advance(this._increments[1]);
             }
 
-            for (let byte of record.bytes) {
-                byte = (0x300 | (byte & 0xff)) << 1;
-                while (byte != 0) {
-                    let increment = this._increments[byte & 0x1];
-                    byte >>= 1;
+            for (const byte of record.bytes)
+            {
+                const stop_bits = 0x300;
+                for (let bits = (stop_bits | (byte & 0xff)) << 1; bits != 0; bits >>= 1)
+                {
+                    let increment = this._increments[bits & 0x1];
 
                     sampleCount += sampleRate / this._symbolRate;
                     while (sampleCount > 0) {
